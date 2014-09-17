@@ -99,7 +99,7 @@ function question(name, choices) {
 
 function container(def) {
   var cnt = containers[def.container];
-
+  cnt.id = '<where does one get the id>';
   var maker;
 
   try {
