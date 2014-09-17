@@ -1,0 +1,17 @@
+{
+  "name": "nsd-container-create",
+  "version": "1.0.0",
+  "description": "Create an nscale container",
+  "main": "index.js",
+  "bin": "cmd.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "David Mark Clements",
+  "license": "Artistic License 2.0",
+  "dependencies": {
+    "inquirer": "^0.7.2",
+    "lodash": "^2.4.1",
+    "optimist": "^0.6.1"
+  }
+}

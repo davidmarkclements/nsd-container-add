@@ -1,0 +1,5 @@
+{
+  "Docker Container": {"type": "docker"},
+  "Amazon Machine Instance": {"type": "aws-ami"},
+  "Amazon Elastic Balancer": {"type": "aws-elb"}
+}
