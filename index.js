@@ -5,11 +5,12 @@ var path = require('path')
 var containers = require('./containers.json')
 var fs = require('fs')
 var home = require('./lib/home')
+var commit = require('./lib/commit')
 var nsdConfig = require(home('.nscale/data/systems/_sys/systems.json'))
 var images = require('./lib/dockerImages')
 var sysId = argv._[0];
 var imagesHash;
-var sys, sysPath;
+var sys, sysPath, repoParth;
 
 if (!argv._.length || !(sys = nsdConfig[sysId])) { 
   throw ReferenceError('nsd container create <sys> - System ID required')
@@ -17,7 +18,8 @@ if (!argv._.length || !(sys = nsdConfig[sysId])) {
 
 console.log('\nAdd a container to ' + sys.repoName + ' (' + sys.name + ')\n');
 
-sysPath = path.join(sys.repoPath, 'system.json')
+repoPath = sys.repoPath;
+sysPath = path.join(repoPath, 'system.json')
 sys = require(sysPath)
 
 images(function (err, res) {
@@ -120,9 +122,16 @@ function ask() {
     question('repositoryUrl'),
     question('buildScript'),
   ], function(def) {
+
     sys.containerDefinitions.push(container(def));
 
-    fs.writeFileSync(sysPath, JSON.stringify(sys, 0, 2))
+    fs.writeFileSync(sysPath, JSON.stringify(sys, 0, 2));
+
+    commit(repoPath, function () {
+       console.log('Added to container to system ' + sysId) 
+    })
+
+
 
   });
 
